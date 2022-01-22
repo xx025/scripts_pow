@@ -5,8 +5,8 @@ window.onload = (function () {
         '        height: auto;        max-height: 500px;        min-height: 100px;        padding: 10px;\n' +
         '">\n' +
         '    <div style="float: left;width: 380px">\n' +
-        '        脚本运行状态：<p id="script_status"></p>\n' +
-        '        脚本激活状态：<p id="acv_status"></p>\n' +
+        '        脚本运行状态：<div id="script_status" style="cloor:green;"></div>\n' +
+        '        脚本激活状态：<div id="acv_status"></div>\n' +
         '        <div id="script_box_acd" class="dis" style="display: none;float: left">\n' +
         '            输入激活码：<input type="text" id="av_code"/>\n' +
         '            <button onclick="function set_av_code() {\n' +
@@ -51,15 +51,12 @@ window.onload = (function () {
     function get_av_code() {
         let user_id = $.cookie('sid');
         let course_id = $.getUrlParam('courseId');
-
-        let storage = window.localStorage.getItem(user_id)
-
+        let storage = window.localStorage.getItem(user_id);
         if (!storage) {
-            window.localStorage.setItem(user_id, JSON.stringify({ data: [] }))
+            window.localStorage.setItem(user_id, JSON.stringify({data: []}));
         }
-        storage = window.localStorage.getItem(user_id)
+        storage = window.localStorage.getItem(user_id);
         let data_ = JSON.parse(storage).data;
-
         let len_tag_use_of_data_search_course_id = -1;
         let av_code_of_course_id = "";
         for (let i = 0; i < data_.length; i++) {
@@ -71,19 +68,15 @@ window.onload = (function () {
         }
         if (len_tag_use_of_data_search_course_id === -1) {
             data_[data_.length] = [course_id, Math.random()];
-            window.localStorage.setItem(user_id, JSON.stringify({ data: data_ }));
+            window.localStorage.setItem(user_id, JSON.stringify({data: data_}));
         } else {
             return data_[len_tag_use_of_data_search_course_id][1];
         }
-
         return get_av_code();
     }
 
-
     function encrypt(data) {
-
         let this_code = window.btoa(data) + 'TMU5HVm5OA8';
-
         return this_code.replace("=", "").replace("=", "");
     }
 
@@ -92,9 +85,8 @@ window.onload = (function () {
     }
 
     function check_av_code() {
-
         let str2 = window.atob(get_course_and_user_code().replace('TMU5HVm5OA8', ""))
-        let str3 = get_av_code()
+        let str3 = get_av_code();
         if (str3 === str2) {
             return 1;
         } else {
@@ -108,8 +100,8 @@ window.onload = (function () {
         $("#script_status").text("正在运行");
         if (k === -1) {
             $("#acv_status").text("未激活");
-            $(".dis").css("display", 'block')
-            $("#course_id_id").val(get_course_and_user_code())
+            $(".dis").css("display", 'block');
+            $("#course_id_id").val(get_course_and_user_code());
         } else {
             $("#acv_status").text("已经激活");
         }
@@ -118,39 +110,32 @@ window.onload = (function () {
     let vat = setInterval(function () {
         if (check_av_code() === -1) {
             clearInterval(vat);
-            mode_mask(-1)
+            mode_mask(-1);
         }
         mode_mask(1);
-        //播放完毕，弹出按钮，值为：'bolck',否则值为：'none'
         let play_over = $($(".txt").parent()[0]).css("display");
         if (play_over === 'block') {
             location.reload();
         }
-
-        //视频加载完毕，显示 'bigplaybtn j-bigplaybtn z-show'， 否则'bigplaybtn j-bigplaybtn'
         let played = $($($(".icon-big_play_btn")[0]).parent()[0]).attr('class');
         if (played === 'bigplaybtn j-bigplaybtn z-show') {
             $(".icon-big_play_btn").parent()[0].click();
         }
 
         if (play_status === 0) {
-            //课程单元选择器
-            let items_list = $(".coursePlayType");//获取课程列表
+            let items_list = $(".coursePlayType");
             for (let i = 0; i < items_list.length; i++) {
                 let item = $($(items_list[i]).find('span')[0]);
                 let status = $(item).attr('data-original-title');
-                //获取学习状态， 两种状态；已学习，未学习
-                //根据这个状态，向上选择父元素，click父元素
                 if (status === "未学习") {
                     let item_parent = $(items_list[i]).parent();
                     let play_btn = $(item_parent[0]).siblings()[0];
-                    play_btn.click();//点击选定
+                    play_btn.click();
                     break;
                 }
             }
-            play_status = 1;//已经选定视频
+            play_status = 1;
         }
-
         let get_video = $($(".ux-video-player_tip")[0]).find('span').text();
         if (get_video.search('视频获取失败') !== -1) {
             location.reload();
