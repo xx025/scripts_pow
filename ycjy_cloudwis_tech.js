@@ -55,7 +55,7 @@ window.onload = (function () {
         let storage = window.localStorage.getItem(user_id)
 
         if (!storage) {
-            window.localStorage.setItem(user_id, JSON.stringify({data: []}))
+            window.localStorage.setItem(user_id, JSON.stringify({ data: [] }))
         }
         storage = window.localStorage.getItem(user_id)
         let data_ = JSON.parse(storage).data;
@@ -71,7 +71,7 @@ window.onload = (function () {
         }
         if (len_tag_use_of_data_search_course_id === -1) {
             data_[data_.length] = [course_id, Math.random()];
-            window.localStorage.setItem(user_id, JSON.stringify({data: data_}));
+            window.localStorage.setItem(user_id, JSON.stringify({ data: data_ }));
         } else {
             return data_[len_tag_use_of_data_search_course_id][1];
         }
@@ -120,6 +120,7 @@ window.onload = (function () {
             clearInterval(vat);
             mode_mask(-1)
         }
+        mode_mask(1);
         //播放完毕，弹出按钮，值为：'bolck',否则值为：'none'
         let play_over = $($(".txt").parent()[0]).css("display");
         if (play_over === 'block') {
