@@ -111,8 +111,10 @@ window.onload = (function () {
         if (check_av_code() === -1) {
             clearInterval(vat);
             mode_mask(-1);
+        } else {
+            mode_mask(1);
         }
-        mode_mask(1);
+
         let play_over = $($(".txt").parent()[0]).css("display");
         if (play_over === 'block') {
             location.reload();
