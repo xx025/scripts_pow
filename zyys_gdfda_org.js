@@ -1,4 +1,6 @@
+/*此文件向网络同步请注意勿作为测试文件*/
 window.onload = (function () {
+
     let htmlDivElementmask = document.createElement("div");
     htmlDivElementmask.innerHTML = '<div id="script_box"\n' +
         '     style="position: absolute;top: 40px;left: 200px;background-color: #e9d53c; z-index: 99999;width: auto;max-width: 700px;  height: auto;max-height: 500px; min-height: 100px; padding: 10px;">\n' +
