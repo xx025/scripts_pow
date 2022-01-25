@@ -65,7 +65,7 @@ window.onload = (function () {
         }
         function video_ended() {
             if (video.ended === true) {
-                window.open("https://www.gdysxh.com/my_classes/classes/index.html")
+                location.href="https://www.gdysxh.com/my_classes/classes/index.html";
             }
         }
 
