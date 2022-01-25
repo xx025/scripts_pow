@@ -89,6 +89,7 @@ window.onload = (function () {
             if (get_run() < 0) {
                 clearInterval(tag);
             }
-        }, 1000)
+            //因为视频加载需要时间，不建议过短
+        }, 5000)
     }
 })();
