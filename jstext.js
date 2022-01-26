@@ -1,32 +1,16 @@
-// ==UserScript==
-// @name         zyys_gdfda_org_auto_play_vidoes
-// @namespace    http://tampermonkey.net/
-// @version      0.1
-// @description  执业药师管理系统 2021 [公需课] [科技创新现状与发展趋势]
-// @author       You
-// @match        *://zyys.gdfda.org/*
-// @icon         https://www.google.com/s2/favicons?domain=gdfda.org
-// @license      MIT
-// @grant        none
-// ==/UserScript==
+var answerItems = [{
+    'title': '加强农村思想道德建设，须以（） 价值观为引领，深化中国特色社会主义和中国梦宣传教育。',
+    'answer': ['社会主义核心']
+}, {
+    'title': '实施乡村振兴战略是中共那那次党代会提出的？',
+    'answer': ['十九大']
+}, {
+    'title': '农村社会治理开始朝着网格化方向实施制度创新，实施“民生110”工程。表明：国家权力契合农村基层法治的要求，为人民群众提供以（ ）的多元救济通道;',
+    'answer': ['以基层司法为核心']
+}];
 
-window.onload = (function () {
-    function appendJQCDN(src) {
-        var head = document.body || document.getElementsByTagName('body')[0];
-        if (src.indexOf("js") == -1) { //css
-            var style = document.createElement('style');
-            style.setAttribute("rel", "stylesheet");
-            style.setAttribute("href", src);
-            head.appendChild(style);
-        } else {
-            var script = document.createElement('script');
-            script.type = "text/javascript";
-            script.setAttribute("src", src);
-            head.appendChild(script);
-        }
-    };
 
-    let nocache = new Date().getTime();
-    appendJQCDN("https://greasyfork.org/scripts/439119-zyys-gdfda-org-auto-play-videos/code/zyys_gdfda_org_auto_play_videos.js?"+nocache)
 
-})();
+let ans=search_ans('实施乡村振兴战略是' +
+    '中共          那那次党代会提出的？');
+console.log(ans)
