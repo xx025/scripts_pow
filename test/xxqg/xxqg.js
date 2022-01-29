@@ -3,6 +3,15 @@
 //     为了更舒适的进行数据通信，将利用油猴插件本身的存储功能
 // 这也迫使这个脚本只能在Tampermonkey插件上运行，所以暴力猴或其他插件工具将无法正常运行此脚本
 
+let htmlDivElementmask = document.createElement("div");
+htmlDivElementmask.innerHTML = '<div id="script_box"\n' +
+    '     style="position: fixed;top: 40px;right: 20px;background-color: #e9d53c; z-index: 99999;width: auto;max-width: 700px;  height: auto;max-height: 500px; min-height: 100px; padding: 10px;">\n' +
+    '    <div style="float: left;width: 380px"> 脚本运行状态：\n' +
+    '        <div id="script_status" style="color:green; display: block;width: 80%;">无状态</div>\n' +
+    '        <br>\n' +
+    '    </div>\n' +
+    '</div>'
+document.body.appendChild(htmlDivElementmask);
 window.onload = (function () {
     function is_login() {
         /* 通过cookies token 检测登录状态*/
@@ -13,17 +22,30 @@ window.onload = (function () {
         }
     }
 
+    function set_status(status) {
+        document.querySelector("#script_status").textContent = status;
+    }
+
+    function reading() {
+        //国际新闻url=https://www.xuexi.cn/xxqg.html?id=cc8b6dc4f4c042e49fc93c279c41dc14
+        //总是阅读新的新闻，国际新闻的新内容比较多
+        location.href = 'https://www.xuexi.cn/xxqg.html?id=cc8b6dc4f4c042e49fc93c279c41dc14'
+
+
+    }
+
     function performing_tasks(current_task) {
         if (current_task === "阅读") {
-            console.log("现在该阅读")
+            set_status("现在该阅读")
+            reading();
         } else if (current_task === "视听") {
-            console.log("现在进行试听学习")
+            set_status("现在进行试听学习")
         } else if (current_task === "每日答题") {
-            console.log("现在进行每日答题")
+            set_status("现在进行每日答题")
         } else if (current_task === "每周答题") {
-            console.log("每周答题")
+            set_status("每周答题")
         } else if (current_task === "专项答题") {
-            console.log("专项答题")
+            set_status("专项答题")
         }
     }
 
@@ -31,7 +53,7 @@ window.onload = (function () {
         let current_task = GM_getValue("current_task");
         console.log("GM_getValue(\"current_task\")" + current_task);
         if (!current_task || current_task === "没有任务了") {
-            console.log("无法获取");
+            set_status(current_task);
             task_assignment();
         } else {
             performing_tasks(current_task);
@@ -42,7 +64,7 @@ window.onload = (function () {
     function task_assignment() {
 
         if (location.href.search('https://pc.xuexi.cn/points/my-points.html') < 0) {
-            console.log("去往积分页面，在积分页面构建任务");
+            set_status("去往积分页面，在积分页面构建任务");
             location.href = 'https://pc.xuexi.cn/points/my-points.html';
         } else {
             let cards = document.querySelectorAll(".my-points-card-text");
@@ -80,9 +102,9 @@ window.onload = (function () {
         } else {
             let textContent = $(".ddlogintext").textContent;
             if (textContent === '用学习强国扫码登录，如未安装扫码下载') {
-                console.log("已经位于登录页面");
+                set_status("已经位于登录页面");
             } else {
-                console.log("跳转")
+                set_status("跳转")
                 location.href = 'https://pc.xuexi.cn/points/login.html';
             }
         }
