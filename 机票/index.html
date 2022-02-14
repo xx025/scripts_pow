@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/2.1.1/jquery.js"
+            type="application/javascript"></script>
+</head>
+<body>
+
+<style>
+
+    <
+    style >
+    .fu_zhu, .fu_zhu * {
+        float: left;
+        padding: 0;
+        margin: 10px 0 0 20px;
+        color: black;
+        background-color: azure;
+    }
+
+    .fu_zhu {
+        padding: 20px 0;
+        position: absolute;
+        right: 50px;
+        bottom: 15px;
+        width: 450px;
+        height: auto;
+        border-color: black;
+        border-width: 2px;
+        border-style: solid;
+        display: block;
+        z-index: 999999;
+    }
+
+    .fu_zhu p {
+        font-size: 19px;
+    }
+
+    .fu_zhu textarea {
+        width: 400px;
+        height: 80px;
+        font-size: 17px;
+        padding: 3px;
+        resize: none
+    }
+
+    .fu_zhu .btn {
+        float: left;
+        height: 50px;
+        width: 122px;
+        border-color: black;
+        border-width: 2px;
+        border-style: solid;
+        color: #0e0000;
+        line-height: 50px;
+        text-align: center;
+        font-size: 21px;
+        cursor: pointer;
+        margin-left: 50px;
+    }
+
+</style>
+
+
+<div class="fu_zhu">
+
+    <div class="fu_zhu">
+        <p>输入指令</p>
+        <textarea id="command">111FEBDTWPVG/D¥DL|115APRDTWPVG/D¥DL</textarea>
+        <p>数据判断</p>
+        <textarea id="keyword">J9|C5|D2|P9</textarea>
+        <p>运行状态:</p><p id="my_run_status">无状态</p>
+        <textarea id="status" readonly=""></textarea>
+        <div class="btn" id="run">开始</div>
+        <div class="btn" id="stop">暂停</div>
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('body').append('<embed  id="my_notify" src="https://ppt-mp3cdn.hrxz.com/d/file/filemp3/hrxz.com-xlbhueszh1b64603.mp3" autostart="true" hidden="true" loop="true">');
+
+    });
+</script>
+</body>
+</html>

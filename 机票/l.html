@@ -1,0 +1,33 @@
+!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>last.html</title>
+    <style>
+    </style>
+    <script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/2.1.1/jquery.js"
+            type="application/javascript"></script>
+
+</head>
+<body>
+
+<audio id="audio" src="https://ppt-mp3cdn.hrxz.com/d/file/filemp3/hrxz.com-xlbhueszh1b64603.mp3" loop="true"></audio>
+
+
+<script type="text/javascript">
+    function playMusic() {
+        var audioEle = document.getElementById("audio");
+
+        audioEle.load();
+        if (audioEle.paused){ /*如果已经暂停*/
+            audioEle.play();   //播放
+        }else {
+            audioEle.pause();  //暂停
+        }
+    }
+
+
+    playMusic();
+</script>
+</body>
+</html>
