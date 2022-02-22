@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/2.1.1/jquery.js"
+            type="application/javascript"></script>
+</head>
+<body>
+</body>
+
+
+<script>
+
+    let mysit = '切换'
+    let htmlDivElementmask = document.createElement("div");
+    let my_css = document.createElement("style");
+    my_css.innerHTML = '#topBtn{\n' +
+        'tposition: fixed;\n' +
+        'bottom: 50px;\n' +
+        'right: 50px;\n' +
+        'width: 60px;\n' +
+        'height: 60px;\n' +
+        'line-height: 60px;\n' +
+        'text-align: center;\n' +
+        'color: #FFF;\n' +
+        'z-index: 999;\n' +
+        'background: #FF5722;\n' +
+        'cursor: pointer;\n' +
+        'border-radius: 30px;\n' +
+        'box-shadow:0px 0px 20px #000;'
+    htmlDivElementmask.innerHTML = mysit
+    htmlDivElementmask.id = 'topBtn'
+    document.body.appendChild(htmlDivElementmask);
+    document.head.append(my_css)
+</script>
+
+</html>
