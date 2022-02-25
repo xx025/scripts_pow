@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         shigeshimao.static_title
 // @namespace    http://tampermonkey.net/
-// @version      0.2.2022年2月26日
-// @description  try to take over the world!
+// @version      0.3.2022年2月26日
+// @description  Fixed title changing price
 // @author       osci
 // @match        http://220.197.177.18:61235/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=177.18
@@ -17,6 +17,7 @@ let max_price = 99;
 
 
 $(document).ready(function () {
+
     function local_storage_set(storage_name, data) {
         localStorage.setItem(storage_name, JSON.stringify(data));
     }
