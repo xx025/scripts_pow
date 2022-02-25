@@ -1,0 +1,223 @@
+Index: shigeshumao/shigeshumao.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/shigeshumao/shigeshumao.js b/shigeshumao/shigeshumao.js
+--- a/shigeshumao/shigeshumao.js	
++++ b/shigeshumao/shigeshumao.js	(date 1645618122857)
+@@ -1,34 +1,10 @@
+-let info = [
+-    ["scarf jjj", 9, 9],
+-    ["scarf jabj", 9, 9],
+-    ["scarf jdfj", 9, 9],
+-    ["scarf j98j", 9, 9]
+-]
+-
+-
+-let uui_d = localStorage.getItem('my_script_flag')
+-
+-if (!uui_d) {
+-    //没有这个对象
+-    localStorage.setItem('my_script_flag', -1)
+-    uui_d = parseInt(localStorage.getItem('my_script_flag'))
+-} else {
+-    uui_d = parseInt(uui_d)
+-}
+-
+-uui_d = uui_d + 1;
+-localStorage.setItem('my_script_flag', uui_d)
+-
+-let flag = (uui_d) % info.length
+-console.log(info[flag])
+-
+-let data = info[flag]
++let count = 9;
++let price = 9;
+ 
+ 
+ $(document).ready(function () {
+ 
+-    let my_css = document.createElement("style");
+-    my_css.innerHTML = '.topBtn{\n' +
++    let my_css = '<style>.topBtn{\n' +
+         'position: fixed;\n' +
+         'bottom: 50px;\n' +
+         'right: 50px;\n' +
+@@ -37,7 +13,7 @@
+         'line-height: 60px;\n' +
+         'text-align: center;\n' +
+         'color: #FFF;\n' +
+-        'z-index: 999;\n' +
++        'z-index: 99999;\n' +
+         'background: #FF5722;\n' +
+         'cursor: pointer;\n' +
+         'border-radius: 30px;\n' +
+@@ -49,23 +25,24 @@
+         '        left: 400px;\n' +
+         '        background-color: aliceblue;\n' +
+         '        height: 400px;\n' +
+-        '        width: 600px;\n' +
++        '        width: 800px;\n' +
+         '        padding: 20px;\n' +
+         '        display:none;' +
+         '    }\n' +
+         '    #my_box_script textarea {\n' +
+-        '        width: 570px;\n' +
++        '        width: 755px;\n' +
+         '        height: 320px;\n' +
+-        '        resize: none\n' +
+-        '    }'
+-
+-    document.head.append(my_css)
+-
+-
+-    $('body').append('<div id="topBtn2" class="topBtn">开始</div>');
++        '        resize: block;\n' +
++        '    }</style>'
++    $('head').append(my_css);
+     $('body').append('<div id="topBtn1" class="topBtn" style="bottom: 150px" >展开</div>');
++    $("body").append('<div id="my_box_script">' +
++        '<textarea id="input_date"></textarea>' +
++        '<button id="dao_ru_my">导入</button>' +
++        '<p id="dig_o"></p>' +
++        '</div>');
+ 
+-    $("topBtn1").click(function () {
++    $("#topBtn1").click(function () {
+         let dis = $("#my_box_script").css("display")
+         if (dis === 'none') {
+             $("#my_box_script").css("display", 'block')
+@@ -75,59 +52,81 @@
+     })
+ 
+ 
+-    var txt1 = '<div id="my_box_script">\n' +
+-        '    <textarea id="input_date"></textarea>\n' +
+-        '    <button id="dao_ru_my">导入</button>\n' +
+-        '</div>';               // 以 HTML 创建新元素
+-    $("body").append(txt1);
++    $("#dao_ru_my").click(function () {
++        let data = $("#my_box_script textarea").val();
++        let data_list = data.split('\n')
++        if (data_list.length > 0) {
++            $("#dig_o").text("成功导入" + data_list.length + "条")
++            let my_value_str = JSON.stringify(data_list);
++            localStorage.setItem("my_title_list", my_value_str);
++        }
++    })
+ 
++
++    function get_flag(my_list) {
++        let my_flag_list = localStorage.getItem("my_flag_list");
++        if (my_flag_list===null) {
++            let my_value_str = JSON.stringify([]);
++            localStorage.setItem("my_flag_list", my_value_str);
++            return 0;
++        } else {
++            let max_flag = my_list.length - 1;
++            //游标最大值为长度减一
++            let local_value = JSON.parse(my_flag_list);
++            let flag = local_value.length
++            local_value[flag] = flag
++            let my_value_str = JSON.stringify(local_value);
++            localStorage.setItem("my_flag_list", my_value_str);
++            return flag
++        }
++    }
+ 
+     let urls = location.href
+-    console.log(urls)
++
++    if (urls.search('products/') > -1) {
++        $(".btn-responsive")[0].click();
++    } else if (urls.search('addproduct/') > -1) {
++
++        setTimeout(function () {
++            $('tbody tr')[0].click()
++            console.log("添加商品")
++        }, 1000)
++
++        setTimeout(function () {
++            let data_list = localStorage.getItem("my_title_list");
++            if (!data_list) {
++                alert("没有导入数据，请导入数据")
++            } else {
++                let local_value = JSON.parse(data_list);
++                //取到列表
++                let flag = get_flag(local_value);
++                //取一个坐标
++                $("#Name").val(local_value[flag])
++                $("#Name").trigger("change");
++                //商品名字
++                $("#Price").val(price)
++                $("#Price").trigger("change");
++                //价格
++            }
+ 
+-    //
+-    // if (urls.search('products/') > -1) {
+-    //     function faBuShangPin() {
+-    //         $(".btn-responsive")[0].click()
+-    //     }
+-    //
+-    //     faBuShangPin()
+-    // } else if (urls.search('addproduct/') > -1) {
+-    //
+-    //     function add_goods() {
+-    //         $('tbody tr')[0].click()
+-    //     }
+-    //
+-    //     setTimeout(function () {
+-    //         add_goods()
+-    //         console.log("添加商品")
+-    //     }, 1000)
+-    //
+-    //     setTimeout(function () {
+-    //         $("#Name").val(data[0])
+-    //         $("#Name").trigger("change");
+-    //         //商品名字
+-    //         $("#Price").val(data[1])
+-    //         $("#Price").trigger("change");
+-    //         //价格
+-    //     }, 1500)
+-    //
+-    //     setTimeout(function () {
+-    //         $("input[type='checkbox'][id='SourceWarehouse_0']")[0].click()
+-    //         //选定国内仓
+-    //     }, 2000)
+-    //
+-    //     setTimeout(function () {
+-    //         let couy = $("input[name='WarehouseQuantity_0']")[0];
+-    //         $(couy).val(data[2])
+-    //         $(couy).trigger("change");
+-    //         //商品数量
+-    //     }, 2500)
+-    //
+-    //     setTimeout(function () {
+-    //         $($("button[id='SubmitProduct']")[0]).click()
+-    //     }, 3000)
+-    //
+-    // }
++        }, 1500)
++
++        setTimeout(function () {
++            $("input[type='checkbox'][id='SourceWarehouse_0']")[0].click()
++            //选定国内仓
++        }, 2000)
++
++        setTimeout(function () {
++            let couy = $("input[name='WarehouseQuantity_0']")[0];
++            $(couy).val(count)
++            $(couy).trigger("change");
++            //商品数量
++        }, 2500)
++
++        setTimeout(function () {
++            $($("button[id='SubmitProduct']")[0]).click()
++        }, 3000)
++
++    }
+ 
+ });
+\ No newline at end of file

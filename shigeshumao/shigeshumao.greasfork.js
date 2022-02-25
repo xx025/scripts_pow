@@ -1,3 +1,15 @@
+// ==UserScript==
+// @name         shigeshumai
+// @namespace    http://tampermonkey.net/
+// @version      0.2.2022年2月26日
+// @description  try to take over the world!
+// @author       osci
+// @match        http://220.197.177.18:61235/*
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=177.18
+// @grant        none
+// ==/UserScript==
+
+
 let count = 9;
 let price = 9;
 
