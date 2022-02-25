@@ -1,4 +1,6 @@
-let count = 9;
+
+
+let amount = 9;
 let price = 9;
 
 
@@ -50,15 +52,32 @@ $(document).ready(function () {
         }
     })
 
+
+    function local_storage_set(storage_name, data) {
+        localStorage.setItem(storage_name, JSON.stringify(data));
+    }
+
+    function local_storage_get(storage_name) {
+        let my_flag_list = localStorage.getItem(storage_name);
+        if (my_flag_list === null) {
+            //如果没有此项则返回空
+            return null;
+        } else {
+            //有此项则正常返回格式化后的数据
+            return JSON.parse(my_flag_list);
+        }
+    }
+
     $("#dao_ru_my").click(function () {
         let data = $("#my_box_script textarea").val();
         let data_list = data.split('\n')
         if (data_list.length > 0) {
             $("#dig_o").text("成功导入" + data_list.length + "条")
-            let my_value_str = JSON.stringify(data_list);
-            localStorage.setItem("my_title_list", my_value_str);
+            local_storage_set("my_title_list", data_list)
+
         }
     })
+
 
     function get_flag() {
         let storage_name = "my_price_flag_list"
@@ -119,7 +138,7 @@ $(document).ready(function () {
 
         setTimeout(function () {
             let couy = $("input[name='WarehouseQuantity_0']")[0];
-            $(couy).val(count)
+            $(couy).val(amount)
             $(couy).trigger("change");
             //商品数量
         }, 2500)
