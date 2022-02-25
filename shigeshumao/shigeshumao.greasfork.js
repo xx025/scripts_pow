@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         shigeshumai
 // @namespace    http://tampermonkey.net/
-// @version      0.2.2022年2月26日
+// @version      0.3.2022年2月26日
 // @description  Get the title from the input box and fix the price and amount
 // @author       osci
 // @match        http://220.197.177.18:61235/*
