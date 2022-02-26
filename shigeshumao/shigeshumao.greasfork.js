@@ -54,7 +54,7 @@ $(document).ready(function () {
                 my_flag_list[flag] = flag
                 local_storage_set(storage_name, my_flag_list)
 
-                if (flag >= e.length) {
+                if (flag >= e) {
                     alert("游标越界；所有的title已经被使用")
                 } else {
                     return flag
