@@ -6,7 +6,7 @@
 // @author       You
 // @match        http://220.197.177.18:61235/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=177.18
-// @require      file:///E:\github\scripts_pow\shigeshumao\shigeshumao.js
+// @require      file:///E:\github\scripts_pow\shigeshumao\shigeshumao.greasfork.js
 // @grant        none
 // ==/UserScript==
 
