@@ -110,7 +110,7 @@ $(document).ready(function () {
             } else {
                 alert("已上架五十个,请关闭脚本")
             }
-        }, 1000)
+        }, 3000)
 
     } else if (urls.search('addproduct/') > -1) {
 
