@@ -1,5 +1,3 @@
-
-
 $(document).ready(function () {
         let urls = location.href
         if (urls.search('login.jsp') > -1) {
@@ -17,9 +15,11 @@ $(document).ready(function () {
                     return num;
                 }
 
-                let tr_list = $(".pjzb tbody tr");
+                let ifr = document.querySelector("iframe").contentWindow
+                let tr_list = ifr.document.querySelector(".pjzb tbody tr")
+
                 for (let i = 0; i < tr_list.length; i++) {
-                    $($(tr_list[i]).find("input")[0]).click()
+                    tr_list[i].querySelectorAll("input")[0].click()
                 }
                 let comments = [
                     "重视教学，对教学工作认真、热情、敬业",
@@ -44,7 +44,7 @@ $(document).ready(function () {
                     "对学生未来所从事职业有较大帮助",
                 ]
 
-                $("#kfxpjText").val(comments[RandomNum(0, comments.length)])
+                ifr.document.querySelector("#kfxpjText").value = comments[RandomNum(0, comments.length)]
 
             }, 100)
         }
